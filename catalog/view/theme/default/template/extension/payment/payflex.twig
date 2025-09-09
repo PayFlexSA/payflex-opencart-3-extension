@@ -1,0 +1,29 @@
+
+<div>
+  {% if redirectUrl %}
+    <div class="buttons">
+    <div class="pull-right">
+      <a href="{{ redirectUrl }}"><input type="button" value="Confirm Order" id="button-confirm" data-loading-text="Loading..." class="btn btn-primary"></a>
+     </div>
+    <p>(you will be redirected to the PayFlex Checkout site)</p>
+  </div>
+  {% endif %}
+
+  {% if errors %}
+    <div>
+      <h2>We're sorry, PayFlex had a hiccup.</h2>
+      <p>Please try again, or if the problem persist, you can continue with another payment method</p>
+      <pre>
+        {% for error in errors %}
+        {{ error }}
+        {% endfor %}
+      </pre>
+    </div>
+  {% endif %}
+</div>
+<script type="text/javascript">
+
+$('#quick-checkout-button-confirm').click(function (){
+  $('#button-confirm').trigger('click');
+})
+</script>

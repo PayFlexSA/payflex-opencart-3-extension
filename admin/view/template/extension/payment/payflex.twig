@@ -1,0 +1,184 @@
+{{ header }}{{ column_left }}
+<div id="content">
+  <div class="page-header">
+    <div class="container-fluid">
+      <div class="pull-right">
+        <button type="submit" form="form-payflex" data-toggle="tooltip" title="{{ button_save }}" class="btn btn-primary"><i class="fa fa-save"></i></button>
+        <a href="{{ cancel }}" data-toggle="tooltip" title="{{ button_cancel }}" class="btn btn-default"><i class="fa fa-reply"></i></a>
+      </div>
+      <h1>{{ heading_title }}</h1>
+      <ul class="breadcrumb">
+        {% for breadcrumb in breadcrumbs %}
+        <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+  <div class="container-fluid">
+    {% if error_warning %}
+      <div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+      </div>
+    {% endif %}
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title"><i class="fa fa-pencil"></i> {{ text_edit }}</h3>
+      </div>
+      <div class="panel-body">
+        <form action="{{ action }}" method="post" enctype="multipart/form-data" id="form-payflex" class="form-horizontal">
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-status">{{ entry_status }}</label>
+            <div class="col-sm-10">
+              <select name="payment_payflex_status" id="input-status" class="form-control">
+                {% if payment_payflex_status %}
+                <option value="1" selected="selected">{{ text_enabled }}</option>
+                <option value="0">{{ text_disabled }}</option>
+                {% else %}
+                <option value="1">{{ text_enabled }}</option>
+                <option value="0" selected="selected">{{ text_disabled }}</option>
+                {% endif %}
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-test"><span data-toggle="tooltip" title="{{ help_testmode }}">{{ entry_test }}</span></label>
+            <div class="col-sm-10">
+              <select name="payment_payflex_test" id="input-test" class="form-control">
+                {% if payment_payflex_test %}
+                  <option value="1" selected="selected">{{ text_yes }}</option>
+                  <option value="0">{{ text_no }}</option>
+                {% else %}
+                  <option value="1">{{ text_yes }}</option>
+                  <option value="0" selected="selected">{{ text_no }}</option>
+                {% endif %}
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group required">
+            <label class="col-sm-2 control-label" for="input-username"><span data-toggle="tooltip" title="{{ help_username }}">{{ entry_username }}</span></label>
+            <div class="col-sm-10">
+              <input type="text" name="payment_payflex_username" value="{{ payment_payflex_username }}" placeholder="{{ entry_username }}" id="input-username" class="form-control"/>
+              {% if error_username %}
+              <div class="text-danger">{{ error_username }}</div>
+              {% endif %}
+            </div>
+          </div>
+
+          <div class="form-group required">
+            <label class="col-sm-2 control-label" for="input-password"><span data-toggle="tooltip" title="{{ help_password }}">{{ entry_password }}</span></label>
+            <div class="col-sm-10">
+              <input type="password" name="payment_payflex_password" value="{{ payment_payflex_password }}" placeholder="{{ entry_password }}" id="input-password" class="form-control"/>
+              {% if error_password %}
+              <div class="text-danger">{{ error_password }}</div>
+              {% endif %}
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-order-status-success">{{ entry_order_status_success }}</span></label>
+            <div class="col-sm-10">
+              <select class="form-control" id="input-order-status-success" name="payment_payflex_order_status_success">
+              	{% for order_status in order_statuses %}
+              	<option value="{{ order_status.order_status_id }}" {{ (order_status.order_status_id == payment_payflex_order_status_success ? 'selected="selected"' : '') }}>{{ order_status.name }}</option>
+              	{% endfor %}
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-order-status-pending">{{ entry_order_status_pending }}</span></label>
+            <div class="col-sm-10">
+              <select class="form-control" id="input-order-status-pending" name="payment_payflex_order_status_pending">
+                {% for order_status in order_statuses %}
+                <option value="{{ order_status.order_status_id }}" {{ (order_status.order_status_id == payment_payflex_order_status_pending ? 'selected="selected"' : '') }}>{{ order_status.name }}</option>
+                {% endfor %}
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-order-status-expired">{{ entry_order_status_expired }}</span></label>
+            <div class="col-sm-10">
+              <select class="form-control" id="input-order-status-expired" name="payment_payflex_order_status_expired">
+                {% for order_status in order_statuses %}
+                <option value="{{ order_status.order_status_id }}" {{ (order_status.order_status_id == payment_payflex_order_status_expired ? 'selected="selected"' : '') }}>{{ order_status.name }}</option>
+                {% endfor %}
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-order-status-cancelled">{{ entry_order_status_cancelled }}</span></label>
+            <div class="col-sm-10">
+              <select class="form-control" id="input-order-status-cancelled" name="payment_payflex_order_status_cancelled">
+                {% for order_status in order_statuses %}
+                <option value="{{ order_status.order_status_id }}" {{ (order_status.order_status_id == payment_payflex_order_status_cancelled ? 'selected="selected"' : '') }}>{{ order_status.name }}</option>
+                {% endfor %}
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-order-status-failed">{{ entry_order_status_failed }}</span></label>
+            <div class="col-sm-10">
+              <select class="form-control" id="input-order-status-failed" name="payment_payflex_order_status_failed">
+                {% for order_status in order_statuses %}
+                <option value="{{ order_status.order_status_id }}" {{ (order_status.order_status_id == payment_payflex_order_status_failed ? 'selected="selected"' : '') }}>{{ order_status.name }}</option>
+                {% endfor %}
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="cron-job-token"><span data-toggle="tooltip" title="{{ help_cron_job_token }}">{{ entry_cron_job_token }}</span></label>
+            <div class="col-sm-10">
+              <div class="input-group">
+                <input type="text" name="payment_payflex_cron_job_token" value="{{ payment_payflex_cron_job_token }}" placeholder="{{ entry_cron_job_token }}" id="cron-job-token" class="form-control" />
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="cron-job-url"><span data-toggle="tooltip" title="{{ help_cron_job_url }}">{{ entry_cron_job_url }}</span></label>
+            <div class="col-sm-10">
+              <input type="text" readonly="readonly" name="payment_payflex_cron_job_url" value="{{ payment_payflex_cron_job_url }}" placeholder="{{ entry_cron_job_url }}" id="cron-job-url" class="form-control" />
+            </div>
+          </div>
+
+          {% if payment_payflex_cron_job_last_run %}
+          <div class="form-group">
+            <label class="col-sm-2 control-label">{{ entry_cron_job_last_run }}</label>
+            <div class="col-sm-10">
+              <input type="text"  readonly="readonly" name="payment_payflex_cron_job_last_run" value="{{ payment_payflex_cron_job_last_run }}" placeholder="{{ payment_payflex_cron_job_last_run }}" id="cron-job-lst-run" class="form-control" />
+            </div>
+          </div>
+          {% endif %}
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-sort">{{ entry_sort }}</label>
+            <div class="col-sm-10">
+              <input type="text" name="payment_payflex_sort_order"  value="{{ payment_payflex_sort_order }}" placeholder="{{ entry_sort }}" id="input-sort" class="form-control"/>   
+            </div>
+          </div>
+
+          <div lass="form-group">
+            <div class="col-sm-10">
+              <small>Extension Version: {{ text_plugin_version }}</small>
+            </div>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script type="text/javascript"><!--
+$('input[name=\'payment_payflex_cron_job_token\']').on('keyup', function() {
+    $('#cron-job-url').val('{{ pf_store_url }}index.php?route=extension/payment/payflex/cron&token=' + $(this).val());
+});
+//--></script>
+
+</div>
+{{ footer }}
