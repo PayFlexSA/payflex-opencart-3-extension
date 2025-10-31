@@ -2,6 +2,7 @@ admin/controller/extension/payment/payflex.php
 admin/language/en-gb/extension/payment/payflex.php
 admin/model/extension/payment/payflex.php
 admin/view/template/extension/payment/payflex.twig
+admin/view/image/payment/payflex.png
 catalog/controller/extension/payment/payflex.php
 catalog/controller/extension/payment/payflex/payflex.php
 catalog/language/en-gb/extension/payment/payflex.php
@@ -10,4 +11,3 @@ catalog/view/theme/default/template/extension/payment/payflex.twig
 image/catalog/payment/payflex-logo.png
 image/catalog/payment/payflex.png
 image/catalog/payment/payflex_proceed.png
-

@@ -1,7 +1,7 @@
 <?php
 // Heading
 $_['heading_title']     = 'PayFlex Payments';
-$_['text_plugin_version']  = '1.0.0';
+$_['text_plugin_version']  = '1.0.1';
 
 // Text
 $_['text_payment']      = 'Payment';
