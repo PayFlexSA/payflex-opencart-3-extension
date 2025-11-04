@@ -1,6 +1,6 @@
 # PayFlex OpenCart Extension
 
-PayFlex payment module for OpenCart v2.3
+PayFlex payment module for OpenCart v3
 
 ## Overview
 
@@ -16,7 +16,6 @@ This extension integrates PayFlex's "Buy Now, Pay Later" payment solution with O
    - Upload the payflex.ocmod.zip file
 
 ## Manual Installation
-
 1. **Download and Extract**
    - Download the latest module archive from the releases page
    - Extract to a temporary location on your computer
@@ -26,7 +25,6 @@ This extension integrates PayFlex's "Buy Now, Pay Later" payment solution with O
    - This will add PayFlex files without overwriting existing OpenCart files
 
 ## Enable Module
-
 1. **Install Module**
    - Log in to your OpenCart admin panel
    - Navigate to **Extensions > Payments**
